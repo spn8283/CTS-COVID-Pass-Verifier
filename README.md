@@ -7,9 +7,11 @@ CTS COVID vaccine pass verifier
    ![image](https://user-images.githubusercontent.com/45216584/146660975-41be57b9-7d8a-48f4-a86b-e1d41588aafa.png)
 
 **Config file setup**
+
   config file use for get MTTR api setting and email setting.
+  
   [MTR]
-  client_id = Client id from MTTR api's 
+  client_id = Client id from MTTR api's
   client_secret = Client Secret for MTTR api's
   url = Tanent URL after register new tenent under MTTR account
 
