@@ -28,20 +28,20 @@ CTS COVID vaccine pass verifier
 
 
   [EMAIL]
-  enableemail = it is used for enable email for program for sending logs value (True=active, False=Deactivate)
+  enable_email = it is used for enable email for program for sending logs value (True=active, False=Deactivate)
 
-  emailaccount = Email addreess from send email
+  email_account = Email addreess from send email
 
-  emailpassword = Email password for email
+  email_password = Email password for email
 
-  senderemail = email address from send
+  sender_email = email address from send
 
-  receiveremail = receiver email address
+  receiver_email = receiver email address
 
-  receivername = receiver name
+  receiver_name = receiver name
 
-  smtphost = smtp.gmail.com smtp server
+  smtp_host = smtp.gmail.com smtp server
 
-  smtpport = 465 smtp port
+  smtp_port = 465 smtp port
   
 
