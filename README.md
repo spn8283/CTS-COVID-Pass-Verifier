@@ -10,10 +10,14 @@ CTS COVID vaccine pass verifier
 
   config file use for get MTTR api setting and email setting.
   
-  [MTR] \n
+  [MTR] 
+
   client_id = Client id from MTTR api's
+
   client_secret = Client Secret for MTTR api's
+
   url = Tanent URL after register new tenent under MTTR account
+  
 
   [TOKEN]
   bearer = bearer token used for verify covid pass. Program will get automaticaly bearer token from MTTR
