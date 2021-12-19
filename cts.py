@@ -2,7 +2,7 @@ import requests
 from configparser import ConfigParser
 from datetime import datetime, timedelta
 import time
-#import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO
 import logging
 import _thread
 import serial
@@ -27,7 +27,7 @@ class CTSRelay:
         self.config_object.read("config.ini")    
         self.authinfo = self.config_object["MTR"]
         self.tokeninfo = self.config_object["TOKEN"]
-        
+        self.emailInfo = self.config_object["EMAIL"]
         
         if not  self.tokeninfo['expires_in'] or not  self.tokeninfo['bearer']:
             self.updateToken() 
@@ -35,12 +35,15 @@ class CTSRelay:
             if datetime.strptime(self.tokeninfo['expires_in'], '%Y-%m-%d %H:%M:%S.%f') < self.now:
                 self.updateToken()
         
-    def readQRCode(self,Thread):
-        ser = serial.Serial('COM3', 19200, timeout = 0)
+    def readQRCode(self):
+        ser = serial.Serial('/dev/ttyACM0', 19200, timeout = 0)
         while True:
             line = ser.readline().decode()
             if len(line) > 0:
-                return line
+                if self.verifyPass(line):
+                    self.VerifiedRelay()
+                else:
+                    self.NotVerifiedRelay()
             time.sleep(0.1)
 
     # def checkTokenValidity(self):
@@ -96,7 +99,7 @@ class CTSRelay:
                 response = requests.post(url, json=payload, headers=headers)
                 if response.status_code == 200:
                     verifyData = response.json()
-                    # print(verifyData)
+                    print(verifyData)
                     return verifyData['verified']
                 else:
                     return False
@@ -105,29 +108,28 @@ class CTSRelay:
                 self.logError(str(e))
                 return False
 
-    # def NotVerifiedRelay(self):
-    #     GPIO.setmode(GPIO.BCM)
-    #     GPIO.setup(18, GPIO.OUT)
-    #     GPIO.output(18, GPIO.LOW)
+    def NotVerifiedRelay(self):
+         GPIO.setmode(GPIO.BCM)
+         GPIO.setup(18, GPIO.OUT)
+         GPIO.output(18, GPIO.LOW)
+         time.sleep(0.25)
 
-    #     time.sleep(0.25)
+         GPIO.output(18, GPIO.HIGH)
+         GPIO.cleanup()
 
-    #     GPIO.output(18, GPIO.HIGH)
-    #     GPIO.cleanup()
+    def VerifiedRelay(self):
+         GPIO.setmode(GPIO.BCM)
+         GPIO.setup(17, GPIO.OUT)
+         GPIO.output(17, GPIO.LOW)
 
-    # def VerifiedRelay(self):
-    #     GPIO.setmode(GPIO.BCM)
-    #     GPIO.setup(17, GPIO.OUT)
-    #     GPIO.output(17, GPIO.LOW)
+         time.sleep(0.25)
 
-    #     time.sleep(0.25)
-
-    #     GPIO.output(17, GPIO.HIGH)
-    #     GPIO.cleanup()
+         GPIO.output(17, GPIO.HIGH)
+         GPIO.cleanup()
 
     def sendEmail(self,subject,message,filename):
         try:
-            self.emailInfo = self.config_object["EMAIL"]
+            
             if self.emailInfo['enableEmail']:
                 subject = subject
                 html = """\
@@ -183,7 +185,7 @@ class CTSRelay:
 
     def logError(self,error):
         f = open('log.txt', 'w')
-        f.write(self.now(),' - %s' % error)
+        f.write('self.now  - %s' % error)
         f.close()            
 
 
@@ -191,11 +193,10 @@ class CTSRelay:
 
 cts= CTSRelay()
 try:
-    # _thread.start_new_thread( cts.readQRCode(), ("QR-1" ) )
-    # cts.VerifiedRelay()
-    cts.sendEmail("test","test","barcode.txt")
+    _thread.start_new_thread( cts.readQRCode(), ("QR-1" ))
 except Exception as error:
+    print (error)
     #cts.NotVerifiedRelay()
-    cts.logError(error)
-# while 1:
-#     pass
+    #cts.logError(error)
+while 1:
+    pass
