@@ -130,7 +130,7 @@ class CTSRelay:
     def sendEmail(self,subject,message,filename):
         try:
             
-            if self.emailInfo['enableEmail']:
+            if self.emailInfo['enable_email']:
                 subject = subject
                 html = """\
                 <html>
@@ -142,15 +142,15 @@ class CTSRelay:
                 html = html.replace("$(message)", message)
                 part2 = MIMEText(html, "html")
 
-                sender_email = self.emailInfo['emailAccount']
-                password = self.emailInfo['emailPassword']
-                receiver_email = self.emailInfo['receiverEmail']
+                sender_email = self.emailInfo['email_account']
+                password = self.emailInfo['email_password']
+                receiver_email = self.emailInfo['receiver_email']
 
                 # Create a multipart message and set headers
                 message = MIMEMultipart()
 
                 message.attach(part2)
-                message["From"] = sender_email
+                message["From"] = self.emailInfo['sender_email']
                 message["To"] = receiver_email
                 message["Subject"] = subject
                 #message["Bcc"] = receiver_email  # Recommended for mass emails  
@@ -177,7 +177,7 @@ class CTSRelay:
                     # Log in to server using secure context and send email
                 text = message.as_string()
                 context = ssl.create_default_context()
-                with smtplib.SMTP_SSL(self.emailInfo['smtpHost'], self.emailInfo['smtpPort'], context=context) as server:
+                with smtplib.SMTP_SSL(self.emailInfo['smtp_host'], self.emailInfo['smtp_port'], context=context) as server:
                     server.login(sender_email, password)
                     server.sendmail(sender_email, receiver_email, text)
         except Exception as error:
