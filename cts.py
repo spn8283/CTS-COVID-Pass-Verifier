@@ -99,7 +99,7 @@ class CTSRelay:
                 response = requests.post(url, json=payload, headers=headers)
                 if response.status_code == 200:
                     verifyData = response.json()
-                    print(verifyData)
+                    #print(verifyData)
                     return verifyData['verified']
                 else:
                     return False
@@ -188,15 +188,12 @@ class CTSRelay:
         f.write('self.now  - %s' % error)
         f.close()            
 
-
-
-
 cts= CTSRelay()
 try:
     _thread.start_new_thread( cts.readQRCode(), ("QR-1" ))
+    #_thread.start_new_thread( cts.readQRCode(), ("QR-2" ))
 except Exception as error:
-    print (error)
-    #cts.NotVerifiedRelay()
-    #cts.logError(error)
+    cts.NotVerifiedRelay()
+    cts.logError(error)
 while 1:
     pass
