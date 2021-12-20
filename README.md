@@ -9,6 +9,7 @@ CTS COVID vaccine pass verifier
     image 1
     
 **Raspberry pi GPIO PinOut for Relay** 
+
   ![image](https://user-images.githubusercontent.com/45216584/146830382-7400a04a-d538-48c2-bada-c808d45a6fa4.png
     image 2
   
