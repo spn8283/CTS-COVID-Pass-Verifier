@@ -8,7 +8,8 @@ CTS COVID vaccine pass verifier
 
 **Raspberry pi GPIO PinOut for Relay** 
   ![image](https://user-images.githubusercontent.com/45216584/146830382-7400a04a-d538-48c2-bada-c808d45a6fa4.png)
-
+  ![image](https://user-images.githubusercontent.com/45216584/146833413-0b6ff967-cd87-40ee-a197-8b1f71b79fd1.png)
+  
   Configure two relay board.
 
     1. Connect 5V power pin(number 2 pin from the image) to power pin on relay board(VCC).
