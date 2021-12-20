@@ -6,17 +6,14 @@ CTS COVID vaccine pass verifier
 
   Scan below Barcode code from the Honeywell USB scanner to enable serial usb.
     ![image](https://user-images.githubusercontent.com/45216584/146834997-d85f0fb8-1a28-480a-a80d-5e2ddb5e11a1.png)
-    
     image 1
     
 **Raspberry pi GPIO PinOut for Relay** 
   ![image](https://user-images.githubusercontent.com/45216584/146830382-7400a04a-d538-48c2-bada-c808d45a6fa4.png)
-  
-  image 2
+    image 2
   
   ![image](https://user-images.githubusercontent.com/45216584/146835034-e95bb36a-7bc1-44ee-ac49-26add9c0ae9e.png)
-  
-  image 3
+    image 3
 
   Configure two relay board.
 
