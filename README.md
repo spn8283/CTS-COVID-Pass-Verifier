@@ -25,3 +25,41 @@ CTS COVID vaccine pass verifier
     3. Pass Not Verified - Connect GPIO 18 pin(number 12 pin from the image 2) to input pin on board(IN2).
 
     4. Ground - connect ground pin (number 6 pin from the image 2) to ground pin the relay board(GND).
+
+Installation 
+
+  1.  install using git
+
+    sudo git clone https://github.com/spn8283/CTS-COVID-Pass-Verifier.git
+  
+  2. Run below command to run QR Code scanner on start of raspberry pi
+    
+    sudo sed -i -e '$i python /home/pi/CTS-COVID-Pass-Verifier/cts.py \n' /etc/rc.local
+  
+  3. confirm cts qr scanner activated on startup run below command, at the end before "exit 0" you will see python /home/pi/CTS-COVID-Pass-Verifier/cts.py 
+    
+    sudo nano /etc/rc.local
+
+Config file setup
+
+  Config file need to setup to verify vaccination pass.
+
+  1. Get credentials from the MTTR using the below link for get test credentials, For commercialized access you need to contact MTTR 
+    
+    https://mattr.global/get-started/
+  
+  2. After register you will received and email which gives you client_id, client_secret and url.
+
+  3. You need to setup config file as below.
+
+    client_id = #Client id from MATTR apis
+
+    client_secret = #Client Secret for MATTR api
+
+    url = #Tenet URL after register new tenet under MATTR account
+
+  4.  after setup config file need to restart raspberry pi using the below command 
+
+    sudo reboot
+
+  5. After restart it will start itself.
