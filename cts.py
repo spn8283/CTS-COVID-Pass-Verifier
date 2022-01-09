@@ -1,5 +1,5 @@
 import requests
-from configparser import ConfigParser
+import configparser, os
 from datetime import datetime, timedelta
 import time
 import RPi.GPIO as GPIO
@@ -23,7 +23,8 @@ class CTSRelay:
     def __init__(self):
        
         self.now=datetime.now()
-        self.config_object = ConfigParser()
+        self.config_object = configparser.ConfigParser()
+        self.config_object.read(os.path.join(os.path.dirname(__file__), 'config.ini'))
         self.config_object.read("config.ini")    
         self.authinfo = self.config_object["MTR"]
         self.tokeninfo = self.config_object["TOKEN"]
