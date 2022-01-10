@@ -34,11 +34,17 @@ Installation
   
   2. Run below command to run QR Code scanner on start of raspberry pi
     
-    sudo sed -i -e '$i python /home/pi/CTS-COVID-Pass-Verifier/cts.py &\n' /etc/rc.local
+    crontab -e 
+
+  3.  Select option 1
   
-  3. confirm cts qr scanner activated on startup run below command, at the end before "exit 0" you will see python /home/pi/CTS-COVID-Pass-Verifier/cts.py 
+  4. Add below lint into rc.local file which open from above command and save 
     
-    sudo nano /etc/rc.local
+    @reboot /usr/bin/python /home/pi/CTS-COVID-Pass-Verifier/cts.py
+
+  5.  Reboot Raspberry pi and test QR Code.
+
+      sudo reboot
 
 Config file setup
 
