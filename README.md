@@ -40,7 +40,7 @@ Installation
   
   4. Add below lint into rc.local file which open from above command and save 
     
-    @reboot /bin/sleep 30; cd /home/pi/CTS-COVID-Pass-Verifier; sudo python /home/pi/CTS-COVID-Pass-Verifier/cts.py > /home/pi/CTS-COVID-Pass-Verifier/log.txt
+    @reboot (/bin/sleep 30; cd /home/pi/CTS-COVID-Pass-Verifier; sudo python /home/pi/CTS-COVID-Pass-Verifier/cts.py > /home/pi/CTS-COVID-Pass-Verifier/log.txt 2>&1)
 
   5.  Reboot Raspberry pi and test QR Code.
 
